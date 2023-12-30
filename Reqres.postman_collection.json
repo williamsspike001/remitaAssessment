@@ -1,0 +1,495 @@
+{
+	"info": {
+		"_postman_id": "6156b740-f3e3-4e45-9ace-97ce5b9f14b5",
+		"name": "Reqres",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23784703",
+		"_collection_link": "https://red-equinox-403867.postman.co/workspace/Remita-~757ec29a-cde6-48a1-92af-fd65aeeb24af/collection/23784703-6156b740-f3e3-4e45-9ace-97ce5b9f14b5?action=share&source=collection_link&creator=23784703"
+	},
+	"item": [
+		{
+			"name": "List Users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Body matches email\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"michael.lawson@reqres.in\");\r",
+							"});\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});var template = `\r",
+							"<style type=\"text/css\">\r",
+							"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
+							"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
+							"    .tftable tr {background-color:#ffffff;}\r",
+							"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
+							"    .tftable tr:hover {background-color:#e0ffff;}\r",
+							"</style>\r",
+							"\r",
+							"<table class=\"tftable\" border=\"1\">\r",
+							"    <tr>\r",
+							"        <th>ID</th>\r",
+							"        <th>Email</th>\r",
+							"        <th>First Name</th>\r",
+							"        <th>Last Name</th>\r",
+							"        <th>Avatar</th>\r",
+							"    </tr>\r",
+							"    \r",
+							"    {{#each response.data}}\r",
+							"        <tr id=row_{{@key}}>\r",
+							"            <td>{{id}}</td>\r",
+							"            <td>{{email}}</td>\r",
+							"            <td>{{first_name}}</td>\r",
+							"            <td>{{last_name}}</td>\r",
+							"            <td>{{avatar}}</td>\r",
+							"        </tr>\r",
+							"    {{/each}}\r",
+							"</table>\r",
+							"`;\r",
+							"\r",
+							"function constructVisualizerPayload() {\r",
+							"  return {response: pm.response.json()}\r",
+							"}\r",
+							"\r",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}api/users?page=2",
+					"host": [
+						"{{BaseURL}}api"
+					],
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Single User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Status code name has 200 OK\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"pm.test(\"Successful GET request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}api/users/2",
+					"host": [
+						"{{BaseURL}}api"
+					],
+					"path": [
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List <Resource>",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 220ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(220);\r",
+							"});\r",
+							"pm.test(\"Successful GET request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}api/unknown",
+					"host": [
+						"{{BaseURL}}api"
+					],
+					"path": [
+						"unknown"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Single <Resource>",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Body matches name\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"fuchsia rose\");\r",
+							"});\r",
+							"pm.test(\"Content-Encoding is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Encoding\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}api/unknown/2",
+					"host": [
+						"{{BaseURL}}api"
+					],
+					"path": [
+						"unknown",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"Body matches job\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"detective\");\r",
+							"});\r",
+							"pm.test(\"Via is present\", function () {\r",
+							"    pm.response.to.have.header(\"Via\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"spike\",\r\n    \"job\": \"detective\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}api/users",
+					"host": [
+						"{{BaseURL}}api"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register-Successful",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code name has 200\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});\r",
+							"pm.test(\"Body matches id\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"4\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"eve.holt@reqres.in\",\r\n    \"password\": \"pistol\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}api/register",
+					"host": [
+						"{{BaseURL}}api"
+					],
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register-Unsuccessful",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Server is present\", function () {\r",
+							"    pm.response.to.have.header(\"Server\");\r",
+							"});\r",
+							"pm.test(\"Response time is less than 300ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"sydney@fife\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}api/register",
+					"host": [
+						"{{BaseURL}}api"
+					],
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login-Successful",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 255ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(255);\r",
+							"});\r",
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"eve.holt@reqres.in\",\r\n    \"password\": \"cityslicka\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}api/login",
+					"host": [
+						"{{BaseURL}}api"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login-Unsuccessful",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches error\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Missing password\");\r",
+							"});\r",
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([400]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"peter@klaven\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}api/login",
+					"host": [
+						"{{BaseURL}}api"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 290ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(290);\r",
+							"});\r",
+							"pm.test(\"Successful PUT request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"williams\",\r\n    \"job\": \"detective\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}api/users/2",
+					"host": [
+						"{{BaseURL}}api"
+					],
+					"path": [
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BaseURL",
+			"value": "https://reqres.in/",
+			"type": "string"
+		}
+	]
+}
